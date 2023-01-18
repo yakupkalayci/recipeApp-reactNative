@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, FlatList, Text} from 'react-native';
+import {SafeAreaView, FlatList} from 'react-native';
 import axios from 'axios';
 
 import CategoryCard from '../../components/CategoryCard';
 import {Category, CategoriesResponse} from '../../types';
+import { ScreenProps } from '../types';
 
 import styles from './Categories.style';
 
-function Categories(): JSX.Element {
+function Categories({navigation}: ScreenProps): JSX.Element {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ function Categories(): JSX.Element {
           <CategoryCard
             categoryName={item.strCategory}
             imgUrl={item.strCategoryThumb}
+            navigation={navigation}
           />
         )}
         keyExtractor={item => item.idCategory}
