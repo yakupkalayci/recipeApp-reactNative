@@ -9,7 +9,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Linking,
-  Alert,
 } from 'react-native';
 
 // axios
@@ -24,7 +23,7 @@ import {MealDetailProps} from '../types';
 // Styles
 import styles from './MealDetail.style';
 
-function MealDetail({route, navigation}: MealDetailProps): JSX.Element {
+function MealDetail({route}: MealDetailProps): JSX.Element {
   const id = route.params.id;
   const [meal, setMeal] = useState<MealDetail2>();
 
@@ -50,27 +49,34 @@ function MealDetail({route, navigation}: MealDetailProps): JSX.Element {
     fetchMeal();
   }, [id]);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Image source={{uri: meal?.strMealThumb}} style={styles.image} />
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{meal?.strMeal}</Text>
-          <Text style={styles.subTitle}>{meal?.strArea}</Text>
-        </View>
-        <View style={styles.innerContainer}>
-          <Text style={styles.details}>{meal?.strInstructions}</Text>
-          {meal?.strYoutube && (
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => openOnYoutube(meal?.strYoutube)}>
-              <Text style={styles.buttonText}>Watch on Youtube</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  if (meal) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <Image source={{uri: meal.strMealThumb}} style={styles.image} />
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{meal?.strMeal}</Text>
+            <Text style={styles.subTitle}>{meal?.strArea}</Text>
+          </View>
+          <View style={styles.innerContainer}>
+            <Text style={styles.details}>{meal?.strInstructions}</Text>
+            {meal?.strYoutube && (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => openOnYoutube(meal?.strYoutube)}>
+                <Text style={styles.buttonText}>Watch on Youtube</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  } else {
+    return (
+      <SafeAreaView style={styles.container} />
+    );
+  }
+
 }
 
 export default MealDetail;
