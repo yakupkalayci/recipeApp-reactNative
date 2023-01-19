@@ -1,15 +1,26 @@
 /* eslint-disable prettier/prettier */
+
+// React, react-native
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
+
+// axios
 import axios from 'axios';
 
+// Components
 import CategoryCard from '../../components/CategoryCard';
-import {Category, CategoriesResponse} from '../../types';
-import { ScreenProps } from '../types';
 
+// API Ttypes
+import {Category, CategoriesResponse} from '../../APItypes';
+
+
+// React-navigation types
+import {CategoriesProps} from '../types';
+
+// Styles
 import styles from './Categories.style';
 
-function Categories({navigation}: ScreenProps): JSX.Element {
+function Categories({navigation}: CategoriesProps): JSX.Element {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {

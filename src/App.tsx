@@ -4,17 +4,22 @@
  *
  * @format
  */
-
+// React
 import React from 'react';
+
+// React Navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+// Pages
 import Categories from './pages/Categories';
 import Meals from './pages/Meals';
+import MealDetail from './pages/MealDetail';
 
-import {StackNavigatorParamList} from './pages/types';
+// React Navigation Types
+import {RootStackParamList} from './pages/types';
 
-const Stack = createNativeStackNavigator<StackNavigatorParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
   return (
@@ -32,6 +37,15 @@ function App(): JSX.Element {
         <Stack.Screen
           name="Meals"
           component={Meals}
+          options={{
+            headerTintColor: '#Ffa53c',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {fontWeight: 'bold'},
+          }}
+        />
+        <Stack.Screen
+          name="MealDetail"
+          component={MealDetail}
           options={{
             headerTintColor: '#Ffa53c',
             headerTitleAlign: 'center',
